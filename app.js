@@ -6,7 +6,7 @@ const server = require("http").Server(app);
 // Socket setup
 const io = require("socket.io")(server);
 io.on("connection", socket => {
-  console.log("User connected");
+  require("./sockets/chat.js")(io, socket);
 });
 
 // Handlebars setup
