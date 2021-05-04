@@ -64,12 +64,25 @@ $(document).ready(() => {
   });
 
   //socket listeners
-  socket.on("new user", (username, channels) => {
-    console.log(`${username} has joined the chat`);
+  socket.on("new user", data => {
     // Add the new user to the online users div
+    if (!socket.username) {
+      socket.username = data.username;
+    }
     socket.emit("get online users");
-    for (channel in channels) {
-      $(".channels").append(`<div class="channel">${channel}</div>`);
+    let isFirst = true;
+    console.log(socket.username);
+    if (data.username === socket.username) {
+      for (channel in data.channels) {
+        if (isFirst) {
+          $(".channels").append(
+            `<div class="channel-current">${channel}</div>`
+          );
+        } else {
+          $(".channels").append(`<div class="channel">${channel}</div>`);
+        }
+        isFirst = false;
+      }
     }
   });
 
@@ -108,12 +121,12 @@ $(document).ready(() => {
     $(".channel-current").removeClass("channel-current");
     $(`.channel:contains('${data.channel}')`).addClass("channel-current");
     $(".channel-current").removeClass("channel");
-    $(".message").remove();
+    $(".message-container").empty();
     data.messages.forEach(message => {
       $(".message-container").append(`
       <div class="message">
-        <p class="message-user">${message.sender}: </p>
-        <p class="message-text">${message.message}</p>
+        <p class="message-user">${message.author}: </p>
+        <p class="message-text">${message.content}</p>
       </div>
     `);
     });

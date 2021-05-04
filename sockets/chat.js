@@ -4,13 +4,14 @@ module.exports = (io, socket, onlineUsers, channels) => {
     socket["username"] = username;
 
     console.log(`${username} has joined the chat`);
-    io.emit("new user", (username, channels));
+    io.emit("new user", { username: username, channels: channels });
   });
 
   socket.on("new message", message => {
     console.log(message);
     const rooms = Array.from(socket.rooms);
     const lastRoom = rooms.pop();
+    channels[lastRoom].push(message);
     socket.broadcast.to(lastRoom).emit("new message", message);
   });
 
@@ -35,7 +36,6 @@ module.exports = (io, socket, onlineUsers, channels) => {
       socket.leave(lastRoom);
     }
     socket.join(newChannel);
-    console.log(socket.rooms);
     socket.emit("user changed channel", {
       channel: newChannel,
       messages: channels[newChannel]
