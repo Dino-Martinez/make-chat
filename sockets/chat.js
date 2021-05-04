@@ -16,6 +16,10 @@ module.exports = (io, socket, onlineUsers) => {
     socket.emit("get online users", onlineUsers);
   });
 
+  socket.on("new channel", newChannel => {
+    console.log(newChannel);
+  });
+
   socket.on("disconnect", () => {
     delete onlineUsers[socket.username];
     console.log(`${socket.username} has left the chat`);

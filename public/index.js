@@ -21,6 +21,16 @@ $(document).ready(() => {
     window.location.replace("/");
   });
 
+  $("#new-channel-btn").click(e => {
+    e.preventDefault();
+    let newChannel = $("#new-channel-input").val();
+
+    if (newChannel.length > 0) {
+      socket.emit("new channel", newChannel);
+      $("#new-channel-input").val("");
+    }
+  });
+
   // Socket emitter
   $("#send-chat-btn").click(e => {
     e.preventDefault();
