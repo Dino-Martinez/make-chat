@@ -4,7 +4,7 @@ module.exports = (io, socket, onlineUsers, channels) => {
     socket["username"] = username;
 
     console.log(`${username} has joined the chat`);
-    io.emit("new user", username);
+    io.emit("new user", (username, channels));
   });
 
   socket.on("new message", message => {

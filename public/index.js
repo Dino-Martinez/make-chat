@@ -64,10 +64,13 @@ $(document).ready(() => {
   });
 
   //socket listeners
-  socket.on("new user", username => {
+  socket.on("new user", (username, channels) => {
     console.log(`${username} has joined the chat`);
     // Add the new user to the online users div
-    $(".users-online").append(`<div class="user-online">${username}</div>`);
+    socket.emit("get online users");
+    for (channel in channels) {
+      $(".channels").append(`<div class="channel">${channel}</div>`);
+    }
   });
 
   socket.on("new message", message => {
@@ -83,6 +86,7 @@ $(document).ready(() => {
   });
 
   socket.on("get online users", onlineUsers => {
+    $(".users-online").empty();
     for (username in onlineUsers) {
       $(".users-online").append(`<div class="user-online">${username}</div>`);
     }
