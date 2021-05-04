@@ -1,4 +1,5 @@
 //Express setup
+const serverless = require("serverless-http");
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
@@ -22,6 +23,9 @@ app.get("/", (req, res) => {
   res.render("index.handlebars");
 });
 
-server.listen("3000", () => {
-  console.log("Server listening on port 3000");
-});
+// Dev server
+// server.listen("3000", () => {
+//   console.log("Server listening on port 3000");
+// });
+
+module.exports.handler = serverless(app);

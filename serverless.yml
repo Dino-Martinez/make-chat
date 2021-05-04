@@ -1,0 +1,14 @@
+service: make-chat
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  lambdaHashingVersion: 20201221
+
+functions:
+  general:
+    handler: app.handler
+    events:
+      - http: "ANY /"
+      - http: "ANY {proxy+}"

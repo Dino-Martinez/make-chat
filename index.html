@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Make Chat</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/dev/public/index.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css%27%3E"
+    />
+    <link href="/dev/public/index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Socket.io</h1>
+    <form class="username-form">
+      <input id="username-input" placeholder="Username" />
+      <button id="create-user-btn">Join Chat</button>
+    </form>
+
+    <div class="main-container">
+      <div class="channels-and-users-online-container">
+        <h1 class="brand">Make Chat</h1>
+        <div class="channels">
+          <button id="log-out-btn" type="button" name="button">Log Out</button>
+          <h2 class="channels-label">Channels</h2>
+          <div class="new-channel-form">
+            <input id="new-channel-input" placeholder="New Channel" /><button
+              id="new-channel-btn"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+        <h2>Online Users</h2>
+        <div class="users-online"></div>
+      </div>
+      <div class="chat-container">
+        <div class="chat-container-fluid">
+          <div class="message-container">
+            <h2>Messages</h2>
+          </div>
+          <div class="text-chat-divide"></div>
+          <div class="chat-box">
+            <textarea id="chat-input" placeholder="Type a message"></textarea
+            ><button class="btn" id="send-chat-btn">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
