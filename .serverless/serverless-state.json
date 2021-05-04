@@ -175,7 +175,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/make-chat/dev/1620094425119-2021-05-04T02:13:45.119Z/make-chat.zip"
+                "S3Key": "serverless/make-chat/dev/1620096075823-2021-05-04T02:41:15.823Z/make-chat.zip"
               },
               "Handler": "app.handler",
               "Runtime": "nodejs12.x",
@@ -193,14 +193,14 @@
               "GeneralLogGroup"
             ]
           },
-          "GeneralLambdaVersionPNvT5C7ii2EPWSUnPcLr2VPQWB7VUuznf7xdvyNDmA": {
+          "GeneralLambdaVersioniLUvlXzzoAqxGEnkAZHSyYHO69UdbTrDLRAxuY0bo0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GeneralLambdaFunction"
               },
-              "CodeSha256": "W6qVQDQMPoWnytUWChqigAfG8Jfr6AJTSl0rXW6w4ys="
+              "CodeSha256": "XlvOhoO4HBEN5d630vSnchlyjc0U4m9RfCSX3KsNoS0="
             }
           },
           "ApiGatewayRestApi": {
@@ -319,7 +319,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1620094420925": {
+          "ApiGatewayDeployment1620096071780": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -382,7 +382,7 @@
           "GeneralLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GeneralLambdaVersionPNvT5C7ii2EPWSUnPcLr2VPQWB7VUuznf7xdvyNDmA"
+              "Ref": "GeneralLambdaVersioniLUvlXzzoAqxGEnkAZHSyYHO69UdbTrDLRAxuY0bo0"
             },
             "Export": {
               "Name": "sls-make-chat-dev-GeneralLambdaFunctionQualifiedArn"
@@ -518,7 +518,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GeneralLambdaVersionPNvT5C7ii2EPWSUnPcLr2VPQWB7VUuznf7xdvyNDmA"
+        "versionLogicalId": "GeneralLambdaVersioniLUvlXzzoAqxGEnkAZHSyYHO69UdbTrDLRAxuY0bo0"
       }
     },
     "configValidationMode": "warn",
@@ -539,7 +539,7 @@
     "artifact": "D:\\Programming\\make-chat\\.serverless\\make-chat.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/make-chat/dev/1620094425119-2021-05-04T02:13:45.119Z",
+    "artifactDirectoryName": "serverless/make-chat/dev/1620096075823-2021-05-04T02:41:15.823Z",
     "artifact": "make-chat.zip"
   }
 }
