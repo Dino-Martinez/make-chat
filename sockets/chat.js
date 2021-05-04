@@ -9,7 +9,9 @@ module.exports = (io, socket, onlineUsers, channels) => {
 
   socket.on("new message", message => {
     console.log(message);
-    socket.broadcast.to(socket.rooms[0]).emit("new message", message);
+    const rooms = Array.from(socket.rooms);
+    const lastRoom = rooms.pop();
+    socket.broadcast.to(lastRoom).emit("new message", message);
   });
 
   socket.on("get online users", () => {
@@ -20,6 +22,20 @@ module.exports = (io, socket, onlineUsers, channels) => {
     channels[newChannel] = [];
     socket.join(newChannel);
     io.emit("new channel", newChannel);
+    socket.emit("user changed channel", {
+      channel: newChannel,
+      messages: channels[newChannel]
+    });
+  });
+
+  socket.on("user changed channel", newChannel => {
+    const rooms = Array.from(socket.rooms);
+    const lastRoom = rooms.pop();
+    if (lastRoom !== socket.id) {
+      socket.leave(lastRoom);
+    }
+    socket.join(newChannel);
+    console.log(socket.rooms);
     socket.emit("user changed channel", {
       channel: newChannel,
       messages: channels[newChannel]

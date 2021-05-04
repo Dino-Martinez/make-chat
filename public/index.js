@@ -4,6 +4,13 @@ $(document).ready(() => {
 
   socket.emit("get online users");
 
+  socket.emit("user changed channel", "General");
+
+  $(document).on("click", ".channel", e => {
+    const newChannel = e.target.textContent;
+    socket.emit("user changed channel", newChannel);
+  });
+
   $("#create-user-btn").click(e => {
     e.preventDefault();
     if ($("#username-input").val().length > 0) {
@@ -39,8 +46,8 @@ $(document).ready(() => {
     if (message.length > 0) {
       socket.emit("new message", {
         author: currentUser,
-        message,
-        channel
+        content: message,
+        channel: channel
       });
 
       $(".message-container").append(
