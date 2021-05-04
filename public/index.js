@@ -34,18 +34,25 @@ $(document).ready(() => {
   // Socket emitter
   $("#send-chat-btn").click(e => {
     e.preventDefault();
-    $(".message-container").append(
-      `
-      <div class="message">
-        <h3 class="message-user">${currentUser}:</h3>
-        <p class="message-text">${$("#chat-input").val()}</p>
-      </div>
-      `
-    );
-    socket.emit("new message", {
-      author: currentUser,
-      content: $("#chat-input").val()
-    });
+    const channel = $(".channel-current").text();
+    const message = $("#chat-input").val();
+    if (message.length > 0) {
+      socket.emit("new message", {
+        author: currentUser,
+        message,
+        channel
+      });
+
+      $(".message-container").append(
+        `
+        <div class="message">
+          <h3 class="message-user">${currentUser}:</h3>
+          <p class="message-text">${$("#chat-input").val()}</p>
+        </div>
+        `
+      );
+    }
+
     $("#chat-input").val("");
   });
 

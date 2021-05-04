@@ -9,7 +9,7 @@ module.exports = (io, socket, onlineUsers, channels) => {
 
   socket.on("new message", message => {
     console.log(message);
-    socket.broadcast.emit("new message", message);
+    socket.broadcast.to(socket.rooms[0]).emit("new message", message);
   });
 
   socket.on("get online users", () => {
