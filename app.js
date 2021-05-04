@@ -6,9 +6,10 @@ const server = require("http").Server(app);
 // Socket setup
 const io = require("socket.io")(server);
 let onlineUsers = {};
+let channels = { General: [] };
 
 io.on("connection", socket => {
-  require("./sockets/chat.js")(io, socket, onlineUsers);
+  require("./sockets/chat.js")(io, socket, onlineUsers, channels);
 });
 
 // Handlebars setup

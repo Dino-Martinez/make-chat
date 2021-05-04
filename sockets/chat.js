@@ -1,4 +1,4 @@
-module.exports = (io, socket, onlineUsers) => {
+module.exports = (io, socket, onlineUsers, channels) => {
   socket.on("new user", username => {
     onlineUsers[username] = socket.id;
     socket["username"] = username;
@@ -17,7 +17,13 @@ module.exports = (io, socket, onlineUsers) => {
   });
 
   socket.on("new channel", newChannel => {
-    console.log(newChannel);
+    channels[newChannel] = [];
+    socket.join(newChannel);
+    io.emit("new channel", newChannel);
+    socket.emit("user changed channel", {
+      channel: newChannel,
+      messages: channels[newChannel]
+    });
   });
 
   socket.on("disconnect", () => {
