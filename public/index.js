@@ -15,6 +15,12 @@ $(document).ready(() => {
     }
   });
 
+  $("#log-out-btn").click(e => {
+    e.preventDefault();
+    socket.disconnect();
+    window.location.replace("/");
+  });
+
   // Socket emitter
   $("#send-chat-btn").click(e => {
     e.preventDefault();
